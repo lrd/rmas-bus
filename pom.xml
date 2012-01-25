@@ -22,11 +22,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.rmas</groupId>
-  <artifactId>service</artifactId>
+  <artifactId>bus</artifactId>
   <packaging>bundle</packaging>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>RMAS event service</name>
+  <name>RMAS Communications Bus</name>
   <url>http://rmas.org</url>
 
   <dependencies>

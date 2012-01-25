@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/blueprint"
+	xmlns:camelcxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+		http://cxf.apache.org/transports/camel http://cxf.apache.org/transports/camel.xsd
+		http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<bean id="routes" class="org.rmas.service.EventRoutes" />
+
+	<camelContext id="org.rmas.service.events" trace="true"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<camel:routeBuilder ref="routes" />
+	</camelContext>
+
+	<camelcxf:cxfEndpoint id="incoming"
+		serviceClass="org.rmas.service.EventEndpoint" address="/rmas/events">
+		<camelcxf:inInterceptors>
+			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+				<property name="properties">
+					<map>
+						<entry key="action" value="UsernameToken" />
+						<entry key="passwordType" value="PasswordText" />
+						<entry key="passwordCallbackRef">
+							<ref component-id="passwordCallback" />
+						</entry>
+					</map>
+				</property>
+			</bean>
+		</camelcxf:inInterceptors>
+	</camelcxf:cxfEndpoint>
+
+	<bean id="passwordCallback" class="org.rmas.service.RmasPasswordCallback">
+		<argument>
+			<map>
+				<entry key="jimbob" value="password" />
+				<entry key="jim" value="password" />
+			</map>
+		</argument>
+	</bean>
+
+</blueprint>

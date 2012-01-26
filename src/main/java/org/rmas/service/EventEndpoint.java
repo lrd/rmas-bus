@@ -4,16 +4,16 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-@WebService(targetNamespace="http://rmas.org")
+@WebService(targetNamespace="http://service.rmas.org/")
 public class EventEndpoint {
 
-	@WebResult( name="response", targetNamespace="http://rmas.org/" )
-	public String pushEvent( @WebParam( name="event", targetNamespace="http://rmas.org/" ) String event ) {
+	@WebResult( name="response", targetNamespace="http://service.rmas.org/" )
+	public String pushEvent( @WebParam( name="event", targetNamespace="http://service.rmas.org/" ) String event ) {
 		return "n/a";
 	}
 
-	@WebResult( name="response", targetNamespace="http://rmas.org/" )
-	public String getEvents( @WebParam( name="from", targetNamespace="http://rmas.org/" ) String when ) {
+	@WebResult( name="response", targetNamespace="http://service.rmas.org/" )
+	public String getEvents( @WebParam( name="from", targetNamespace="http://service.rmas.org/" ) String when ) {
 		return "n/a";
 	}
 	
